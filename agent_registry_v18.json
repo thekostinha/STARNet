@@ -1,0 +1,208 @@
+{
+  "version": "V18.0-T1",
+  "agents": [
+    {
+      "agent_id": "ANALYSIS",
+      "name": "Analysis",
+      "role": "Análise e síntese",
+      "purpose": "Analisar informação, comparar hipóteses e detetar contradições.",
+      "capabilities": [
+        "analise",
+        "comparacao",
+        "sintese",
+        "contradicoes"
+      ],
+      "allowed_tools": [
+        "context_manager",
+        "memory_search"
+      ],
+      "risk_level": "INTERNAL",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 2
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "76513470ffbb35ae6dcf7a9e45a18d808da452ac777668a1ad305c9f2ca6963f"
+    },
+    {
+      "agent_id": "AUTOMATO",
+      "name": "Automato",
+      "role": "Supervisor operacional",
+      "purpose": "Receber missões validadas, coordenar agentes e pedir verificação ou replaneamento.",
+      "capabilities": [
+        "decomposicao",
+        "delegacao",
+        "coordenacao",
+        "replaneamento"
+      ],
+      "allowed_tools": [
+        "agent_registry",
+        "task_manager",
+        "context_manager",
+        "memory_search",
+        "evaluator"
+      ],
+      "risk_level": "INTERNAL",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 3,
+        "max_parallel_agents": 4
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "92861ffbfa6d524a32119f81d9f1ee5ad998d14522ff35ac11a848774e626485"
+    },
+    {
+      "agent_id": "CODE",
+      "name": "Code",
+      "role": "Desenvolvimento controlado",
+      "purpose": "Criar e testar código com backups e aprovação adequada para escrita.",
+      "capabilities": [
+        "criacao_codigo",
+        "analise_codigo",
+        "testes",
+        "execucao_controlada"
+      ],
+      "allowed_tools": [
+        "code_read",
+        "code_write",
+        "python",
+        "powershell_safe"
+      ],
+      "risk_level": "WRITE",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 3,
+        "require_backup_before_write": true
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "24a11f32121922bfdf16bf9cc6ae9bebc27c56f154fa542a508fa7eaad057584"
+    },
+    {
+      "agent_id": "FILES",
+      "name": "Files",
+      "role": "Gestão de ficheiros",
+      "purpose": "Localizar, ler e organizar documentos dentro das permissões atribuídas.",
+      "capabilities": [
+        "pesquisa_ficheiros",
+        "leitura",
+        "classificacao"
+      ],
+      "allowed_tools": [
+        "files_search",
+        "files_read"
+      ],
+      "risk_level": "READ_ONLY",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 2,
+        "max_files_per_task": 20
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "5b05c344eec03d8c7a511edb02a973ff4a3506db6d91e4ea1e8741f7dcd8d978"
+    },
+    {
+      "agent_id": "GUARDIAN",
+      "name": "Guardian",
+      "role": "Segurança e controlo de risco",
+      "purpose": "Questionar permissões, risco, alcance e condições antes de operações sensíveis.",
+      "capabilities": [
+        "analise_risco",
+        "permissoes",
+        "scope_creep",
+        "bloqueio"
+      ],
+      "allowed_tools": [
+        "tool_registry",
+        "approval_store",
+        "audit_log",
+        "context_manager"
+      ],
+      "risk_level": "SENSITIVE",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 2,
+        "block_on_unknown_risk": true
+      },
+      "enabled": true,
+      "independent_verification": true,
+      "fingerprint": "976bdbb9765dcac57bad2e1504574be88b2c5a90e63daf407ab6cd1c7d3bc6bb"
+    },
+    {
+      "agent_id": "REPORTS",
+      "name": "Reports",
+      "role": "Relatórios e documentação",
+      "purpose": "Transformar resultados verificados em documentação rastreável para o humano.",
+      "capabilities": [
+        "relatorios",
+        "documentacao",
+        "resumos"
+      ],
+      "allowed_tools": [
+        "evidence_store",
+        "audit_log"
+      ],
+      "risk_level": "INTERNAL",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 2
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "1d43fef788c2a7e3b86485f086580b82f778030d5f43c83909292580dda1775c"
+    },
+    {
+      "agent_id": "VALIDATOR",
+      "name": "Validator",
+      "role": "Verificador independente",
+      "purpose": "Tentar provar que o resultado do executor está incompleto, incorreto ou sem evidência.",
+      "capabilities": [
+        "verificacao",
+        "evidencia",
+        "contradicoes",
+        "falsos_positivos"
+      ],
+      "allowed_tools": [
+        "evaluator",
+        "evidence_store",
+        "context_manager"
+      ],
+      "risk_level": "INTERNAL",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 3,
+        "reject_without_evidence": true
+      },
+      "enabled": true,
+      "independent_verification": true,
+      "fingerprint": "cff19c31c4bbaa1a9f4f8a4e914a95fa3eb481f88e3c29a6033d9a73b7810fdb"
+    },
+    {
+      "agent_id": "WEB",
+      "name": "Web",
+      "role": "Pesquisa externa",
+      "purpose": "Pesquisar fontes autorizadas e entregar resultados com referências.",
+      "capabilities": [
+        "pesquisa_web",
+        "leitura",
+        "evidencia"
+      ],
+      "allowed_tools": [
+        "web_search",
+        "web_open"
+      ],
+      "risk_level": "READ_ONLY",
+      "preferred_model": "qwen3.5:9b",
+      "limits": {
+        "max_attempts": 2,
+        "max_sources": 10
+      },
+      "enabled": true,
+      "independent_verification": false,
+      "fingerprint": "734bf07c65fe9d19eff53250da4b78711651027c2e17a7100b16c470e1914a3d"
+    }
+  ]
+}

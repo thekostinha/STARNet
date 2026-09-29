@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Runtime / estado gerado
+state_*.json
+audit_*.jsonl
+memory_*.json
+memory_*/
+workspace/
+sandbox/
+
+# Testes temporários / artefactos de execução
+v18_t1_test/
+v18_t4_contract_test/
+v18_t5_6_integrate_selector.py
+v18_t5_6_integrate_selector_fixed.py
+v18_t5_7_2_5_fix_selector_readonly.py
+v18_t5_7_selector_functional_test/
+v18_t5_selector_test/
+
+# Backups automáticos e ficheiros temporários
+*.tmp
+*.temp
+*.bak
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
